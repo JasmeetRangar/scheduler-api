@@ -1,4 +1,6 @@
 const router = require("express").Router();
+//const ENV = require("../environment");
+require("dotenv");
 
 module.exports = (db, updateAppointment) => {
   router.get("/appointments", (request, response) => {
@@ -25,9 +27,10 @@ module.exports = (db, updateAppointment) => {
       );
     });
   });
-
+  console.log("process env: ", process.env.TEST_ERROR)
   router.put("/appointments/:id", (request, response) => {
     if (process.env.TEST_ERROR) {
+      console.log(typeof process.env.TEST_ERROR)
       setTimeout(() => response.status(500).json({}), 1000);
       return;
     }
